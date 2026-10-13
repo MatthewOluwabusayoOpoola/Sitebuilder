@@ -44,7 +44,7 @@ export default async function servingRoutes(app) {
   }
 
   if (config.sitesDomain) {
-    const suffix = '.' + config.sitesDomain
+    const suffix = '.' + config.sitesDomain.split(':')[0] // the port, if any, is only for building links
     app.addHook('onRequest', async (req, reply) => {
       const host = String(req.headers.host || '').split(':')[0].toLowerCase()
       if (!host.endsWith(suffix)) return
